@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Stack,Col } from 'react-bootstrap'
+import { TiUserAdd } from "react-icons/ti";
 
 export default function Usercard({user}) {
 
@@ -14,7 +15,7 @@ export default function Usercard({user}) {
                 <Col xs={4}><img alt='' src={user.image ?? defaultProfile} className='roundedCircle' style={{width: '60px', objectFit: 'cover', borderRadius : '50%', height: '60px'}}/></Col>
                 <Col xs={8}>{user.name}</Col>
             </Stack>
-            <Button variant='outline-dark' className='my-2 mx-auto'>Collegati</Button>
+            <Button variant='outline-dark' className='my-2 mx-auto d-flex align-items-center'><TiUserAdd className='me-1' />Collegati</Button>
         </div>
     
   )

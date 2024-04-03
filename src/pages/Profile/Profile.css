@@ -9,6 +9,10 @@
     left: 3%;
 }
 
+.imageProfile:hover {
+
+}
+
 .card-content {
     margin-top: 90px;
 }
@@ -25,4 +29,35 @@
 
 .subcard{
     height: 120px;
+}
+
+.icon-edit{
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    font-size: 40px;
+    border-radius: 50%;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.525);
+    cursor: pointer;
+    color: #278bf0;
+}
+
+.icon-edit:hover{
+    background-color: rgba(255, 255, 255, 0.882);
+}
+
+.icon-edit-dark{
+    position: absolute;
+    right: 18px;
+    top: 58%;
+    font-size: 40px;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    color: #3f3f3f;
+}
+
+.icon-edit-dark:hover{
+    background-color: rgba(0, 0, 0, 0.163);
 }
