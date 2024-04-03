@@ -1,0 +1,28 @@
+.imageProfile {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    position: absolute;
+    border: solid 2px black;
+    object-fit: cover;
+    top: 250px;
+    left: 3%;
+}
+
+.card-content {
+    margin-top: 90px;
+}
+
+.bg-lightblue {
+    background-color: rgb(221, 229, 249);
+}
+
+.text-ellips {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.subcard{
+    height: 120px;
+}
