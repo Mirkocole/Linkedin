@@ -1,50 +1,66 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { Col, Container, Card, Button, Row, Stack } from 'react-bootstrap';
+import { jwtDecode } from "jwt-decode";
 import '../Profile/Profile.css';
 import Carosello from '../../components/Carosello/Carosello';
+import Usercard from '../../components/Usercard/Usercard';
 
 
 export default function Profile() {
 
-    let { idProfile } = useParams();
-
     const apiKey = process.env.REACT_APP_AUTHTOKEN;
     const apiUrl = process.env.REACT_APP_APIURL;
+    let { idProfile } = useParams();
+    let adminKey = jwtDecode(apiKey);
+
+
+
+
+
 
     const [profile, setProfile] = useState({});
-    const [allProfiles,setAllProfiles] = useState([]);
+    const [allProfiles, setAllProfiles] = useState([]);
+    const [isAdmin, setIsAdmin] = useState(false);
+
+
 
     const defaultCopertina = 'https://placehold.co/800x400';
     const defaultProfile = 'https://placehold.co/400';
 
-    
+
     useEffect(() => {
 
         getProfile();
         getAllProfile();
+
+        console.log(adminKey._id)
+        if (idProfile == adminKey._id) {
+            setIsAdmin(true);
+        }
+        console.log(isAdmin)
     }, [])
 
     async function getProfile() {
         try {
             let result = await fetch(apiUrl + idProfile, {
-                headers: { "Content-Type": "application/json", "Authorization": 'Bearer '+apiKey }
+                headers: { "Content-Type": "application/json", "Authorization": 'Bearer ' + apiKey }
             });
 
             if (result.ok) {
                 let json = await result.json();
                 setProfile(json);
-                console.log(json)
+                // console.log(json)
             }
         } catch (error) {
-         console.log(error);
+            console.log(error);
         }
     }
 
-    async function getAllProfile(){
+    async function getAllProfile() {
         try {
             let result = await fetch(apiUrl, {
-                headers: { "Content-Type": "application/json", "Authorization": 'Bearer '+apiKey }
+                headers: { "Content-Type": "application/json", "Authorization": 'Bearer ' + apiKey }
             });
 
             if (result.ok) {
@@ -53,7 +69,7 @@ export default function Profile() {
                 // console.log(json)
             }
         } catch (error) {
-         console.log(error);
+            console.log(error);
         }
     }
 
@@ -65,6 +81,7 @@ export default function Profile() {
                 <Stack direction='horizontal' gap={3} className='container align-items-start'>
 
                     <Col xs={12} md={9} className='border bg-light rounded m-0'>
+                        {isAdmin && <h1 className='p-3 text-danger'>Sei Admin</h1>}
 
                         <Card className='position-relative w-100'>
                             <Card.Img variant="top" src={profile.image ?? defaultCopertina} style={{ height: '350px', width: 'auto', objectFit: 'cover' }} />
@@ -96,6 +113,9 @@ export default function Profile() {
                             </div>
                             <div className='p-3 border rounded bg-light '>
                                 <h5>Altri profili simili...</h5>
+                                {allProfiles && allProfiles.filter((el, index) => index < 5).map((el, index) => {
+                                    return <Usercard key={index} user={el} />
+                                })}
                             </div>
                         </Stack>
                     </Col>
