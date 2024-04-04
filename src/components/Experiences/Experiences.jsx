@@ -86,9 +86,10 @@ async function deleteExperience(idex){
         <>
             <Container className="bg-white rounded border p-3 my-3 position-relative">
                 <h4>Esperienze</h4>
-                {isAdmin && <><MdOutlineEdit className='icon-edit-base' /> <IoAdd className='icon-add-base' onClick={handleShowAddModal} /> </>}
+                {isAdmin && <> <IoAdd className='icon-add-base' onClick={handleShowAddModal} /> </>}
                 {experiences && experiences.map((el, index) => {
-                    return <Container key={index} className='my-5'>
+                    return <Container key={index} className='my-5 position-relative'>
+                        <MdOutlineEdit className='icon-edit-base' />
                         <h5><b>Azienda:</b> {el.company}</h5>
                         <h5><i> {el.area} </i></h5>
                         <p><b>Ruolo:</b> {el.role}</p>
@@ -145,7 +146,6 @@ async function deleteExperience(idex){
                     </Button>
                 </Modal.Footer>
             </Modal>
-
 
 
 

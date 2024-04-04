@@ -82,8 +82,8 @@
 
 .icon-add-base{
     position: absolute;
-    right: 10.5%;
-    top: 15%;
+    right: 7%;
+    top: 2%;
     font-size: 43px;
     border-radius: 50%;
     padding: 8px;
@@ -102,8 +102,8 @@
 @media only screen and (max-width: 1000px) {
     .icon-add-base{
         position: absolute;
-        right: 15%;
-        top: 15%;
+        right: 7%;
+        top: 2%;
         font-size: 43px;
         border-radius: 50%;
         padding: 8px;
