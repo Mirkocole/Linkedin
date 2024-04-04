@@ -1,0 +1,114 @@
+.imageProfile {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    position: absolute;
+    border: solid 4px rgb(255, 255, 255);
+    object-fit: cover;
+    top: 150px;
+    left: 3%;
+}
+
+.imageProfile:hover {
+
+}
+
+.card-content {
+    margin-top: 90px;
+}
+
+.bg-lightblue {
+    background-color: rgb(221, 229, 249);
+}
+
+.text-ellips {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.subcard{
+    height: 150px;
+}
+
+.icon-edit{
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    font-size: 40px;
+    border-radius: 50%;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.525);
+    cursor: pointer;
+    color: #278bf0;
+}
+
+.icon-edit:hover{
+    background-color: rgba(255, 255, 255, 0.882);
+}
+
+.icon-edit-dark{
+    position: absolute;
+    right: 18px;
+    top: 38%;
+    font-size: 40px;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    color: #3f3f3f;
+}
+
+.icon-edit-dark:hover{
+    background-color: rgba(0, 0, 0, 0.163);
+}
+
+
+.icon-edit-base{
+    position: absolute;
+    right: 5%;
+    top: 15%;
+    font-size: 43px;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    color: #3f3f3f;
+    /* background-color: rgba(0, 0, 0, 0.075); */
+}
+
+.icon-edit-base:hover{
+    background-color: rgba(0, 0, 0, 0.163);
+}
+
+
+.icon-add-base{
+    position: absolute;
+    right: 10.5%;
+    top: 15%;
+    font-size: 43px;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    color: #3f3f3f;
+    /* background-color: rgba(0, 0, 0, 0.075); */
+}
+
+.icon-add-base:hover{
+    background-color: rgba(0, 0, 0, 0.163);
+}
+
+
+/* Responsive layout */
+
+@media only screen and (max-width: 1000px) {
+    .icon-add-base{
+        position: absolute;
+        right: 15%;
+        top: 15%;
+        font-size: 43px;
+        border-radius: 50%;
+        padding: 8px;
+        cursor: pointer;
+        color: #3f3f3f;
+        /* background-color: rgba(0, 0, 0, 0.075); */
+    }
+}
