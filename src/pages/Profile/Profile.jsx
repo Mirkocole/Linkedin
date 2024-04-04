@@ -6,10 +6,11 @@ import '../Profile/Profile.css';
 import Carosello from '../../components/Carosello/Carosello';
 import Usercard from '../../components/Usercard/Usercard';
 import { MdOutlineEdit } from "react-icons/md";
+import Experiences from '../../components/Experiences/Experiences';
 
 
 
-export default function Profile() {
+export default function Profile({idAdmin}) {
 
     const apiKey = process.env.REACT_APP_AUTHTOKEN;
     const apiUrl = process.env.REACT_APP_APIURL;
@@ -35,9 +36,10 @@ export default function Profile() {
     useEffect(() => {
 
         // console.log(adminKey._id)
-        if (idProfile == adminKey._id) {
+        if (idProfile == adminKey._id || idAdmin) {
             setIsAdmin(true);
         }
+
         getProfile();
         getAllProfile();
 
@@ -46,10 +48,20 @@ export default function Profile() {
 
     async function getProfile() {
         try {
+            // console.log(idAdmin)
             setLoadingProfile((prev) => !prev);
-            let result = await fetch(apiUrl + idProfile, {
-                headers: { "Content-Type": "application/json", "Authorization": 'Bearer ' + apiKey }
-            });
+            let result;
+            if (idAdmin) {
+                
+                result = await fetch(apiUrl + idAdmin , {
+                   headers: { "Content-Type": "application/json", "Authorization": 'Bearer ' + apiKey }
+               });
+            }else{
+                result = await fetch(apiUrl + idProfile , {
+                   headers: { "Content-Type": "application/json", "Authorization": 'Bearer ' + apiKey }
+               });
+
+            }
 
             if (result.ok) {
                 let json = await result.json();
@@ -72,7 +84,7 @@ export default function Profile() {
             if (result.ok) {
                 let json = await result.json();
                 setAllProfiles(json);
-                // console.log(json)
+                // console.log(json);
             }
         } catch (error) {
             console.log(error);
@@ -88,12 +100,12 @@ export default function Profile() {
 
                 <Stack direction='horizontal' gap={3} className='container align-items-start'>
 
-                    <Col xs={12} md={9} className='border bg-light rounded m-0'>
-                        {isAdmin && <h1 className='p-3 text-danger'>Sei Admin</h1>}
+                    <Col xs={12} md={9} className='rounded m-0 px-5'>
+                        {/* {isAdmin && <h1 className='p-3 text-danger'>Sei Admin</h1>} */}
 
-                        <Card className='position-relative w-100'>
+                        <Card className='position-relative w-100 pb-4'>
                             <MdOutlineEdit className={`icon-edit d-${isAdmin ? 'flex':'none'}`} />
-                            <Card.Img variant="top" src={profile.image ?? defaultCopertina} style={{ height: '350px', width: 'auto', objectFit: 'cover' }} />
+                            <Card.Img variant="top" src={profile.image ?? defaultCopertina} style={{ height: '250px', width: 'auto', objectFit: 'cover' }} />
                             <Card.Img variant="top" src={profile.image ?? defaultProfile} className='imageProfile' />
                             {isAdmin && <MdOutlineEdit className='icon-edit-dark' />}
                             <Card.Body className='card-content position-relative'>
@@ -107,9 +119,12 @@ export default function Profile() {
                                     <Button variant="outline-dark" className='d-flex w-auto me-2'>Altro</Button>
                                 </Row>
                             </Card.Body>
+                        <Carosello />
                         </Card>
 
-                        <Carosello />
+
+                        <Experiences isAdmin={isAdmin} apiKey={apiKey} apiUrl={apiUrl} id={idAdmin ?? idProfile} />
+
                     </Col>
 
                     <Col md={3} className=' d-none d-md-flex'>
