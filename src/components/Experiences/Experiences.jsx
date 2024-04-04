@@ -145,6 +145,11 @@ async function deleteExperience(idex){
                     </Button>
                 </Modal.Footer>
             </Modal>
+
+
+
+
+            {/*  */}
         </>
     )
 }
