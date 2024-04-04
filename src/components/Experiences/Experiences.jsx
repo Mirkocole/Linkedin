@@ -95,7 +95,7 @@ async function deleteExperience(idex){
                         <p><b>Descrizione:</b> {el.description}</p>
                         <p><b>Data inizio:</b> {new Date(el.startDate).toLocaleDateString('it-IT', 'dd/MM/yyyy')}</p>
                         <p><b>Data fine:</b> {new Date(el.endDate).toLocaleDateString('it-IT', 'dd/MM/yyyy')}</p>
-                        <Button variant='danger' onClick={()=>{deleteExperience(el._id)}}>Delete</Button>
+                        {isAdmin && <Button variant='danger' onClick={()=>{deleteExperience(el._id)}}>Delete</Button>}
                         <hr></hr>
                     </Container>
                 })}
@@ -135,7 +135,6 @@ async function deleteExperience(idex){
                             <Form.Control as="textarea" rows={3} id='description' defaultValue={valueAdd.description} onChange={(e)=>{handleUpdateValue(e)}}/>
                         </Form.Group>
                     </Form>
-                    <p className='p-3 m-2 bg-warning'>{valueAdd.role}</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseAddModal}>
