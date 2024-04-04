@@ -312,10 +312,10 @@ export default function Experiences({ isAdmin, id, apiKey, apiUrl }) {
               <Form.Label>Inizio lavoro</Form.Label>
               <Form.Control
                 type="date"
-                // value={new Date(selected.startDate).toLocaleDateString(
-                //   "it-IT",
-                //   "dd/MM/yyyy"
-                // )}
+                value={new Date(selected.startDate).toLocaleDateString(
+                  "it-IT",
+                  "dd/MM/yyyy"
+                )}
                 id="startDate"
                 onChange={(e) => {
                   handleUpdateValue(e);
@@ -326,10 +326,10 @@ export default function Experiences({ isAdmin, id, apiKey, apiUrl }) {
               <Form.Label>Fine lavoro</Form.Label>
               <Form.Control
                 type="date"
-                // value={new Date(selected.endDate).toLocaleDateString(
-                //   "it-IT",
-                //   "dd/MM/yyyy"
-                // )}
+                value={new Date(selected.endDate).toLocaleDateString(
+                  "it-IT",
+                  "dd/MM/yyyy"
+                )}
                 id="endDate"
                 onChange={(e) => {
                   handleUpdateValue(e);
