@@ -8,6 +8,7 @@ import {
   InputGroup,
   Stack,
   Row,
+  Image,
 } from "react-bootstrap";
 import {
   IoLogoLinkedin,
@@ -18,67 +19,132 @@ import {
   IoIosText,
   IoIosNotifications,
 } from "react-icons/io";
+import "./MainNav.css";
 
 export default function MainNav() {
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary">
+      <Navbar expand="lg" bg="light" style={{ backgroundColor: "white" }}>
         <Container>
-          <Stack direction="horizontal">
-          
-              <Navbar.Brand href="#">
-                <IoLogoLinkedin
-                  style={{ color: "#0d66c2", fontSize: "1.5em" }}
-                />
-              </Navbar.Brand>
+          <Navbar.Brand href="#">
+            <IoLogoLinkedin style={{ color: "#0d66c2", fontSize: "1.5em" }} />
+          </Navbar.Brand>
 
-            <InputGroup style={{ maxWidth: "30rem" }} className="me-5">
+          <Form className="ms-2">
+            <InputGroup style={{ maxWidth: "30rem", borderStyle: "none" }}>
               <InputGroup.Text
-                style={{ backgroundColor: "white", borderRightStyle: "none" }}
+                style={{
+                  backgroundColor: "#edf3f7",
+                  bordeRightStyle: "none",
+                  borderLeftStyle: "none",
+                  borderTopStyle: "none",
+                  borderBottomStyle: "none",
+                }}
               >
                 <IoIosSearch />
               </InputGroup.Text>
               <Form.Control
-                type="trext"
+                type="text"
                 placeholder="Search.."
-                style={{ borderLeftStyle: "none" }}
+                style={{
+                  backgroundColor: "#edf3f7",
+                  borderStyle: "none",
+                }}
               />
             </InputGroup>
+          </Form>
 
-            <Navbar.Collapse id="navbarScroll" className="ms-auto">
-              <Nav
-                className="me-auto my-2 my-lg-0"
-                style={{ maxHeight: "100px" }}
-                navbarScroll
+          <Nav className="ms-auto my-2 my-lg-0" style={{ maxHeight: "70px" }}>
+            <Nav.Link href="#" className="text-center">
+              <IoIosHome style={{ fontSize: "1.5em" }} />
+              <div style={{ fontSize: "0.7em" }} className="p-2">
+                Home
+              </div>
+            </Nav.Link>
+
+            <Nav.Link href="#" className="text-center">
+              <IoIosPeople style={{ fontSize: "1.5em" }} />
+              <div style={{ fontSize: "0.7em" }} className="p-2">
+                Network
+              </div>
+            </Nav.Link>
+
+            <Nav.Link href="#" className="text-center">
+              <IoIosBriefcase style={{ fontSize: "1.5em" }} />
+              <div style={{ fontSize: "0.7em" }} className="p-2">
+                Jobs
+              </div>
+            </Nav.Link>
+
+            <Nav.Link href="#" className="text-center">
+              <IoIosText style={{ fontSize: "1.5em" }} />
+              <div style={{ fontSize: "0.7em" }} className="p-2">
+                Messagging
+              </div>
+            </Nav.Link>
+
+            <Nav.Link href="#" className="text-center">
+              <IoIosNotifications style={{ fontSize: "1.5em" }} />
+              <div style={{ fontSize: "0.7em" }} className="p-2">
+                Notifications
+              </div>
+            </Nav.Link>
+
+            <Nav.Link>
+              <Image
+                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80"
+                roundedCircle
+                style={{ width: "24px", height: "24px", objectFit: "cover" }}
+                className="mx-2"
+              ></Image>
+              <NavDropdown
+                title="Me"
+                id="nav-dropdown"
+                style={{ fontSize: "0.7em" }}
               >
-                <Nav.Link href="#" className="text-center">
-                  <IoIosHome style={{ fontSize: "1.5em" }} />
-                  <div style={{ fontSize: "0.7em" }}>Home</div>
-                </Nav.Link>
+                <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
+                <NavDropdown.Item eventKey="4.2">
+                  Another action
+                </NavDropdown.Item>
+                <NavDropdown.Item eventKey="4.3">
+                  Something else here
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item eventKey="4.4">
+                  Separated link
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav.Link>
 
-                <Nav.Link href="#" className="text-center">
-                  <IoIosPeople style={{ fontSize: "1.5em" }} />
-                  <div style={{ fontSize: "0.7em" }}>Network</div>
-                </Nav.Link>
+            <div className="vr" />
+            
+            <Nav.Link>
+              <Image
+                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80"
+                roundedCircle
+                style={{ width: "24px", height: "24px", objectFit: "cover" }}
+                className="mx-2"
+              ></Image>
+              <NavDropdown
+                title="Me"
+                id="nav-dropdown2"
+                style={{ fontSize: "0.7em" }}
+              >
+                <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
+                <NavDropdown.Item eventKey="4.2">
+                  Another action
+                </NavDropdown.Item>
+                <NavDropdown.Item eventKey="4.3">
+                  Something else here
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item eventKey="4.4">
+                  Separated link
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav.Link>
 
-                <Nav.Link href="#" className="text-center">
-                  <IoIosBriefcase style={{ fontSize: "1.5em" }} />
-                  <div style={{ fontSize: "0.7em" }}>Jobs</div>
-                </Nav.Link>
-
-                <Nav.Link href="#" className="text-center">
-                  <IoIosText style={{ fontSize: "1.5em" }} />
-                  <div style={{ fontSize: "0.7em" }}>Messagging</div>
-                </Nav.Link>
-
-                <Nav.Link href="#" className="text-center">
-                  <IoIosNotifications style={{ fontSize: "1.5em" }} />
-                  <div style={{ fontSize: "0.7em" }}>Notifications</div>
-                </Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-            <Navbar.Toggle aria-controls="navbarScroll" />
-          </Stack>
+          </Nav>
         </Container>
       </Navbar>
     </>
