@@ -17,6 +17,5 @@ export default function Usercard({user}) {
             </Stack>
             <Button variant='outline-dark' className='my-2 mx-auto d-flex align-items-center'><TiUserAdd className='me-1' />Collegati</Button>
         </div>
-    
   )
 }
