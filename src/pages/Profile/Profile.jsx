@@ -18,13 +18,13 @@ export default function Profile({ idAdmin }) {
     let adminKey = jwtDecode(apiKey);
 
 
-    const [valueAdd,setValueAdd] = useState({});
+    const [valueAdd, setValueAdd] = useState({});
 
     const handleUpdateValue = (e) => {
         // console.log(valueAdd[e.target.id]);
         let key = e.target.id;
         let val = e.target.value;
-        setValueAdd((prev) => prev = {...prev, [key] : val});
+        setValueAdd((prev) => prev = { ...prev, [key]: val });
     };
 
 
@@ -38,11 +38,24 @@ export default function Profile({ idAdmin }) {
     const [allProfiles, setAllProfiles] = useState([]);
     const [isAdmin, setIsAdmin] = useState(false);
     const [loadingProfile, setLoadingProfile] = useState(false);
+    const [image, setImage] = useState(new FormData());
+    const [refresh, setRefresh] = useState(false);
 
 
 
     const defaultCopertina = 'https://placehold.co/800x400';
     const defaultProfile = 'https://placehold.co/400';
+
+
+    function handleImage(img) {
+        // const formData = {}
+        // formData['experience'] = img;
+        setImage((prev) => {
+            prev.delete('experience');
+            prev.append('experience', img);
+            return prev;
+        })
+    }
 
 
     useEffect(() => {
@@ -56,7 +69,7 @@ export default function Profile({ idAdmin }) {
         getAllProfile();
 
         // console.log(isAdmin)
-    }, [])
+    }, [refresh])
 
     async function getProfile() {
         try {
@@ -104,6 +117,38 @@ export default function Profile({ idAdmin }) {
     }
 
 
+    async function addImageProfile() {
+        try {
+            
+                if (image) {
+                    let res = await fetch(apiUrl + profile._id + '/picture', {
+                        method: 'POST',
+                        headers: { "Authorization": 'Bearer ' + apiKey },
+                        body: image
+                    });
+
+                    if (res) {
+                        console.log(res);
+                        setRefresh(!refresh);
+                        setShowEditModal(false);
+                    } else {
+                        // setRefresh(!refresh);
+                        setShowEditModal(false);
+
+                    }
+
+                } else {
+
+                    setRefresh(!refresh);
+                    setShowEditModal(false);
+                }
+        
+
+        } catch (error) {
+
+        }
+    }
+
 
     return (
         <>
@@ -113,13 +158,12 @@ export default function Profile({ idAdmin }) {
                     <Stack direction='horizontal' gap={3} className='container align-items-start'>
 
                         <Col xs={12} md={9} className='rounded m-0 px-5'>
-                            {/* {isAdmin && <h1 className='p-3 text-danger'>Sei Admin</h1>} */}
-
+                           
                             <Card className='position-relative w-100 pb-4'>
                                 <MdOutlineEdit className={`icon-edit d-${isAdmin ? 'flex' : 'none'}`} />
                                 <Card.Img variant="top" src={profile.image ?? defaultCopertina} style={{ height: '250px', width: 'auto', objectFit: 'cover' }} />
                                 <Card.Img variant="top" src={profile.image ?? defaultProfile} className='imageProfile' />
-                                {isAdmin && <MdOutlineEdit className='icon-edit-dark' />}
+                                {isAdmin && <MdOutlineEdit className='icon-edit-dark' onClick={handleOpenModal} />}
                                 <Card.Body className='card-content position-relative'>
                                     <Card.Title className='fw-bolder fs-3'>{profile.name} {profile.surname}</Card.Title>
                                     <Card.Text>{profile.email} </Card.Text>
@@ -159,36 +203,16 @@ export default function Profile({ idAdmin }) {
                     </Stack>
 
 
-                    {/* Modale AddExperiences */}
+                    {/* Modale Image  */}
                     <Modal show={showEditModal} onHide={handleCloseModal}>
                         <Modal.Header closeButton>
-                            <Modal.Title>Aggiungi Esperienza Lavorativa</Modal.Title>
+                            <Modal.Title>Modifica immagine profilo</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Form>
                                 <Form.Group className="mb-3" >
-                                    <Form.Label>Città</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci la Città" id='area' defaultValue={valueAdd.area} onChange={(e) => { handleUpdateValue(e) }} />
-                                </Form.Group>
-                                <Form.Group className="mb-3"  >
-                                    <Form.Label>Nome Azienda</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci il nome dell'Azienda" id='company' defaultValue={valueAdd.company} onChange={(e) => { handleUpdateValue(e) }} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" >
-                                    <Form.Label>Ruolo</Form.Label>
-                                    <Form.Control type="text" placeholder="Inserisci il ruolo svolto" id='role' defaultValue={valueAdd.role} onChange={(e) => { handleUpdateValue(e) }} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" >
-                                    <Form.Label>Inizio lavoro</Form.Label>
-                                    <Form.Control type="date" id='startDate' defaultValue={valueAdd.startDate} onChange={(e) => { handleUpdateValue(e) }} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" >
-                                    <Form.Label>Fine lavoro</Form.Label>
-                                    <Form.Control type="date" id='endDate' defaultValue={valueAdd.endDate} onChange={(e) => { handleUpdateValue(e) }} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" >
-                                    <Form.Label>Descrivi il lavoro svolto</Form.Label>
-                                    <Form.Control as="textarea" rows={3} id='description' defaultValue={valueAdd.description} onChange={(e) => { handleUpdateValue(e) }} />
+                                    <Form.Label>Immagine</Form.Label>
+                                    <Form.Control type="file" id='picture' onChange={(e) => { handleImage(e.target.files[0]) }} />
                                 </Form.Group>
                             </Form>
                         </Modal.Body>
@@ -196,8 +220,8 @@ export default function Profile({ idAdmin }) {
                             <Button variant="secondary" onClick={handleCloseModal}>
                                 Annulla
                             </Button>
-                            <Button variant="primary" onClick={()=>{}}>
-                                Aggiungi esperienza
+                            <Button variant="primary" onClick={addImageProfile}>
+                                Modifica
                             </Button>
                         </Modal.Footer>
                     </Modal>
