@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import MainNav from '../../components/MainNav/MainNav';
 
 export default function Homepage() {
 
@@ -8,6 +9,9 @@ export default function Homepage() {
   const [search,setSearch] = useState('');
 
   return (
+    <>
+    <MainNav />
     <div>Homepage</div>
+    </>
   )
 }

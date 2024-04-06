@@ -117,7 +117,7 @@ export default function MainNav() {
             </Nav.Link>
 
             <div className="vr" />
-            
+
             <Nav.Link>
               <Image
                 src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80"
