@@ -42,7 +42,6 @@ export default function Homepage() {
     <MainNav />
     <Container>
       <Row>
-      {console.log(users)}
       {
         users.map((el,index)=>{
          return <Col xs={12} md={4} lg={3} key={index}>
