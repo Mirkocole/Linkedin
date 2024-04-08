@@ -20,15 +20,16 @@ import {
   IoIosNotifications,
 } from "react-icons/io";
 import "./MainNav.css";
+import { Link } from "react-router-dom";
 
 export default function MainNav() {
   return (
     <>
       <Navbar expand="lg" bg="light" style={{ backgroundColor: "white" }}>
         <Container>
-          <Navbar.Brand href="#">
+          <Link to="/">
             <IoLogoLinkedin style={{ color: "#0d66c2", fontSize: "1.5em" }} />
-          </Navbar.Brand>
+          </Link>
 
           <Form className="ms-2">
             <InputGroup style={{ maxWidth: "30rem", borderStyle: "none" }}>
@@ -55,42 +56,42 @@ export default function MainNav() {
           </Form>
 
           <Nav className="ms-auto my-2 my-lg-0" style={{ maxHeight: "70px" }}>
-            <Nav.Link href="#" className="text-center">
+            <Link to="/" className="text-center">
               <IoIosHome style={{ fontSize: "1.5em" }} />
               <div style={{ fontSize: "0.7em" }} className="p-2">
                 Home
               </div>
-            </Nav.Link>
+            </Link>
 
-            <Nav.Link href="#" className="text-center">
+            <Link to="#" className="text-center">
               <IoIosPeople style={{ fontSize: "1.5em" }} />
               <div style={{ fontSize: "0.7em" }} className="p-2">
                 Network
               </div>
-            </Nav.Link>
+            </Link>
 
-            <Nav.Link href="#" className="text-center">
+            <Link to="#" className="text-center">
               <IoIosBriefcase style={{ fontSize: "1.5em" }} />
               <div style={{ fontSize: "0.7em" }} className="p-2">
                 Jobs
               </div>
-            </Nav.Link>
+            </Link>
 
-            <Nav.Link href="#" className="text-center">
+            <Link to="#" className="text-center">
               <IoIosText style={{ fontSize: "1.5em" }} />
               <div style={{ fontSize: "0.7em" }} className="p-2">
                 Messagging
               </div>
-            </Nav.Link>
+            </Link>
 
-            <Nav.Link href="#" className="text-center">
+            <Link to="#" className="text-center">
               <IoIosNotifications style={{ fontSize: "1.5em" }} />
               <div style={{ fontSize: "0.7em" }} className="p-2">
                 Notifications
               </div>
-            </Nav.Link>
+            </Link>
 
-            <Nav.Link>
+            <Link to={'/profile/me'}>
               <Image
                 src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80"
                 roundedCircle
@@ -114,11 +115,11 @@ export default function MainNav() {
                   Separated link
                 </NavDropdown.Item>
               </NavDropdown>
-            </Nav.Link>
+            </Link>
 
             <div className="vr" />
 
-            <Nav.Link>
+            <Link>
               <Image
                 src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80"
                 roundedCircle
@@ -142,7 +143,7 @@ export default function MainNav() {
                   Separated link
                 </NavDropdown.Item>
               </NavDropdown>
-            </Nav.Link>
+            </Link>
 
           </Nav>
         </Container>

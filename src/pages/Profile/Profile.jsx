@@ -7,6 +7,8 @@ import Carosello from '../../components/Carosello/Carosello';
 import Usercard from '../../components/Usercard/Usercard';
 import { MdOutlineEdit } from "react-icons/md";
 import Experiences from '../../components/Experiences/Experiences';
+import MainNav from '../../components/MainNav/MainNav';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -46,6 +48,8 @@ export default function Profile({ idAdmin }) {
     const defaultCopertina = 'https://placehold.co/800x400';
     const defaultProfile = 'https://placehold.co/400';
 
+    const navigate = useNavigate();
+
 
     function handleImage(img) {
         // const formData = {}
@@ -69,7 +73,7 @@ export default function Profile({ idAdmin }) {
         getAllProfile();
 
         // console.log(isAdmin)
-    }, [refresh])
+    }, [refresh,navigate])
 
     async function getProfile() {
         try {
@@ -119,30 +123,30 @@ export default function Profile({ idAdmin }) {
 
     async function addImageProfile() {
         try {
-            
-                if (image) {
-                    let res = await fetch(apiUrl + profile._id + '/picture', {
-                        method: 'POST',
-                        headers: { "Authorization": 'Bearer ' + apiKey },
-                        body: image
-                    });
 
-                    if (res) {
-                        console.log(res);
-                        setRefresh(!refresh);
-                        setShowEditModal(false);
-                    } else {
-                        // setRefresh(!refresh);
-                        setShowEditModal(false);
+            if (image) {
+                let res = await fetch(apiUrl + profile._id + '/picture', {
+                    method: 'POST',
+                    headers: { "Authorization": 'Bearer ' + apiKey },
+                    body: image
+                });
 
-                    }
-
-                } else {
-
+                if (res) {
+                    console.log(res);
                     setRefresh(!refresh);
                     setShowEditModal(false);
+                } else {
+                    // setRefresh(!refresh);
+                    setShowEditModal(false);
+
                 }
-        
+
+            } else {
+
+                setRefresh(!refresh);
+                setShowEditModal(false);
+            }
+
 
         } catch (error) {
 
@@ -152,13 +156,14 @@ export default function Profile({ idAdmin }) {
 
     return (
         <>
-            {loadingProfile ? <Spinner /> :
+            {loadingProfile ? <Spinner /> : <>
+                <MainNav />
                 <Container fluid className='d-flex justify-content-center p-0 my-5'>
 
                     <Stack direction='horizontal' gap={3} className='container align-items-start'>
 
                         <Col xs={12} md={9} className='rounded m-0 px-5'>
-                           
+
                             <Card className='position-relative w-100 pb-4'>
                                 <MdOutlineEdit className={`icon-edit d-${isAdmin ? 'flex' : 'none'}`} />
                                 <Card.Img variant="top" src={profile.image ?? defaultCopertina} style={{ height: '250px', width: 'auto', objectFit: 'cover' }} />
@@ -226,7 +231,8 @@ export default function Profile({ idAdmin }) {
                         </Modal.Footer>
                     </Modal>
 
-                </Container>}
+                </Container>
+            </>}
 
         </>
     )
