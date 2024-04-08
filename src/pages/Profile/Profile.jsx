@@ -162,7 +162,7 @@ export default function Profile({ idAdmin }) {
 
                     <Stack direction='horizontal' gap={3} className='container align-items-start'>
 
-                        <Col xs={12} md={9} className='rounded m-0 px-5'>
+                        <Col xs={12} md={9} className='rounded m-0 px-lg-5 px-2'>
 
                             <Card className='position-relative w-100 pb-4'>
                                 <MdOutlineEdit className={`icon-edit d-${isAdmin ? 'flex' : 'none'}`} />
